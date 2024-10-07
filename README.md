@@ -56,7 +56,7 @@ curl -X POST http://localhost:3000/debug \
 
 ## Containerize 
 
-Build a docker container image for deployment with BentoML:
+Make sure you have Docker installed and running. Build a docker container image for deployment with BentoML:
 
 ```bash
 bentoml build . --version dev

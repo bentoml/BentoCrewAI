@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "bento_crew_demo"
+version = "0.1.0"
+description = "bento-crew-demo using crewAI"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<=3.13"
+crewai = { extras = ["tools"], version = ">=0.67.1,<1.0.0" }
+opentelemetry-api = ">=1.22.0,<2.0.0"
+
+[tool.poetry.scripts]
+bento_crew_demo = "bento_crew_demo.main:run"
+run_crew = "bento_crew_demo.main:run"
+train = "bento_crew_demo.main:train"
+replay = "bento_crew_demo.main:replay"
+test = "bento_crew_demo.main:test"
+serve = "bento_crew_demo.main:serve"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

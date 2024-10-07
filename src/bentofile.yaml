@@ -1,0 +1,16 @@
+service: "bento_crew_demo.service:CrewAgent"
+labels:
+  author: "bentoml-team"
+  project: "crewai-example"
+include:
+  - "bento_crew_demo/**/*.py"
+  - "bento_crew_demo/**/*.yaml"
+python:
+  lock_packages: false
+  pip_args: "--no-deps"
+  requirements_txt: "./requirements.txt"
+envs:
+  - name: OPENAI_API_KEY
+docker:
+  python_version: "3.11"
+

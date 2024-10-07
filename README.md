@@ -24,7 +24,10 @@ source ./venv/bin/activate
 pip install -r requirements.txt --no-deps
 ```
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+Set your **`OPENAI_API_KEY`** environment variable:
+```bash
+export OPENAI_API_KEY='your_openai_key'
+```
 
 
 ## Launching the API server

@@ -1,4 +1,4 @@
-# BentoCrewDemo Crew
+# BentoCrewAI: Serving CrewAI Agent with BentoML
 
 Welcome to the BentoCrewAI demo project. This template is designed to help you serve and deploy a CrewAI multi-agent application with the BentoML serving framework. This project
 

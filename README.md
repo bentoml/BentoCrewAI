@@ -1,6 +1,6 @@
 # BentoCrewAI: Serving CrewAI Agent with BentoML
 
-Welcome to the BentoCrewAI demo project. This template is designed to help you serve and deploy a CrewAI multi-agent application with the BentoML serving framework. This project
+Welcome to the BentoCrewAI project. This project demonstrates how to serve and deploy a [CrewAI](https://github.com/crewAIInc/crewAI) multi-agent application with the [BentoML](https://github.com/bentoml/BentoML) serving framework.
 
 
 ## Getting Started
@@ -82,6 +82,61 @@ Follow CrewAI docs on how to customize your Agents and tasks.
 - Modify `src/bento_crew_demo/config/tasks.yaml` to define your tasks
 - Modify `src/bento_crew_demo/crew.py` to add your own logic, tools and specific args
 - Modify `src/bento_crew_demo/main.py` to add custom inputs for your agents and tasks
+
+## Using Open-Source LLMs
+
+We recommend using [OpenLLM](https://github.com/bentoml/OpenLLM) on [BentoCloud](https://bentoml.com/)
+for fast and efficient private LLM deployment:
+```bash
+# Install libraries
+pip install -U openllm bentoml
+openllm repo update
+
+# Login/Signup BentoCloud
+bentoml cloud login 
+
+# Deploy mistral 7B
+openllm deploy mistral:7b-4bit --instance-type gpu.t4.1.8x32
+```
+Follow CLI output instructions to view deployment details on BentoCloud UI, and copy your
+deployed endpoint URL.
+
+Add the custom LLM definition to the `BentoCrewDemoCrew` class:
+```python
+from crewai import Agent, Crew, Process, Task, LLM
+from crewai.project import CrewBase, agent, crew, task, llm
+
+@CrewBase
+class BentoCrewDemoCrew():
+    ...
+
+    @llm
+    def mistral(self) -> LLM:
+        model_name="TheBloke/Mistral-7B-Instruct-v0.1-AWQ"
+        return LLM(
+            # add `openai/` prefix to model so litellm knows this is an openai
+            # compatible endpoint and route to use OpenAI API Client
+            model=f"openai/{model_name}",
+			api_key="na",
+            base_url="https://<YOUR_DEPLOYED_OPENLLM_ENDPOINT>/v1"
+        )
+```
+
+And modify the `config/agent.yaml` file where you want to use this LLM, e.g.:
+
+```diff
+researcher:
+  role: >
+    {topic} Senior Data Researcher
+  goal: >
+    Uncover cutting-edge developments in {topic}
+  backstory: >
+    You're a seasoned researcher with a knack for uncovering the latest
+    developments in {topic}. Known for your ability to find the most relevant
+    information and present it in a clear and concise manner.
++  llm: mistral
+```
+
 
 ## Trouble shooting
 

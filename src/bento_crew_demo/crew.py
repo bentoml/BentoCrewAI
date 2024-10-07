@@ -1,5 +1,5 @@
-from crewai import Agent, Crew, Process, Task
-from crewai.project import CrewBase, agent, crew, task
+from crewai import Agent, Crew, Process, Task, LLM
+from crewai.project import CrewBase, agent, crew, task, llm
 
 # Uncomment the following line to use an example of a custom tool
 # from bento_crew_demo.tools.custom_tool import MyCustomTool
@@ -10,7 +10,6 @@ from crewai.project import CrewBase, agent, crew, task
 @CrewBase
 class BentoCrewDemoCrew():
 	"""BentoCrewDemo crew"""
-
 	@agent
 	def researcher(self) -> Agent:
 		return Agent(
@@ -38,6 +37,18 @@ class BentoCrewDemoCrew():
 			config=self.tasks_config['reporting_task'],
 			output_file='report.md'
 		)
+
+	# # Uncomment the code below for using private deployed open-source LLM
+	# @llm
+	# def mistral(self) -> LLM:
+	# 	model_name="TheBloke/Mistral-7B-Instruct-v0.1-AWQ"
+	# 	return LLM(
+    #         # add `openai/` prefix to model so litellm knows this is an openai
+    #         # compatible endpoint and route to use OpenAI API Client
+    #         model=f"openai/{model_name}",
+	# 		api_key="na",
+    #         base_url="https://<YOUR_DEPLOYED_OPENLLM_ENDPOINT>/v1"
+    #     )
 
 	@crew
 	def crew(self) -> Crew:

@@ -33,7 +33,7 @@ export OPENAI_API_KEY='your_openai_key'
 ## Launching the API server
 
 ```bash
-DEBUG=true ./venv/bin/bentoml serve bento_crew_demo.service:CrewAgent
+./venv/bin/bentoml serve bento_crew_demo.service:CrewAgent
 ```
 
 ## Calling the API
@@ -46,10 +46,10 @@ curl -X POST http://localhost:3000/run \
 
 The `/run` API endpoint takes the "topic" input from client, and returns the final results.
 
-With the `DEBUG=true` env var, a `/debug` endpoint is also exposed for streaming all intermediate results from the Crew Agent for easier debugging:
+Use the `/stream` endpoint for streaming all intermediate results from the Crew Agent for full context of planning and thinking process:
 
 ```bash
-curl -X POST http://localhost:3000/debug \
+curl -X POST http://localhost:3000/stream \
    -H 'Content-Type: application/json' \
    -d '{"topic": "Model Inference"}'
 ```
@@ -68,7 +68,6 @@ Follow CLI output instruction to run the generated container image. E.g.:
 ```bash
 docker run --rm \
     -e OPENAI_API_KEY=$OPENAI_API_KEY \
-    -e DEBUG=true \
     -p 3000:3000 \
     crew_agent:dev
 ```

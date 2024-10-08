@@ -98,9 +98,11 @@ bentoml cloud login
 openllm deploy mistral:7b-4bit --instance-type gpu.t4.1.8x32
 ```
 Follow CLI output instructions to view deployment details on BentoCloud UI, and copy your
-deployed endpoint URL.
+deployed endpoint URL. 
 
-Add the custom LLM definition to the `BentoCrewDemoCrew` class:
+> 💡 For other open-source LLMs, try running `openllm hello` command to explore more.
+
+Next, add the following custom LLM definition to the `BentoCrewDemoCrew` class, replace with your deployed API endpoint URL:
 ```python
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task, llm

@@ -2,6 +2,7 @@
 
 Welcome to the BentoCrewAI project. This project demonstrates how to serve and deploy a [CrewAI](https://github.com/crewAIInc/crewAI) multi-agent application with the [BentoML](https://github.com/bentoml/BentoML) serving framework.
 
+See [here](https://docs.bentoml.com/en/latest/examples/overview.html) for a full list of BentoML example projects.
 
 ## Getting Started
 
